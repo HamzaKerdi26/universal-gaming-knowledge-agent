@@ -1,0 +1,1 @@
+A plain text fixture note, used to test that the loader also handles .txt files, not just markdown.

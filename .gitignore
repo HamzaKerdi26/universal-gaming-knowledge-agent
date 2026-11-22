@@ -1,0 +1,80 @@
+# UGA - workspace-wide ignore rules.
+#
+# Purpose: protect the entire tree before any `git init` happens.
+# The per-application files (backend/.gitignore, frontend/.gitignore) are
+# still in place and still apply; this file adds coverage for everything
+# outside those two subprojects and for cases the subproject files miss.
+#
+# Rules without a leading path separator match at ANY depth.
+
+# --- Dependencies (all depths) ---
+node_modules/
+
+# --- Build output (all depths) ---
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# --- Test / coverage output ---
+coverage/
+.nyc_output/
+
+# --- Environment / secret files (all depths) ---
+# Order matters: the negation must come after the .env.* rule.
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# --- Local logs ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Local credentials (never commit; contains a password) ---
+.local-admin-credentials.txt
+
+# --- Local-only tooling artifacts ---
+.cache/
+.turbo/
+.vite/
+.eslintcache
+*.pid
+*.pid.lock
+*.local
+
+# --- Editor / OS temporary files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+*.orig
+*.rej
+
+# --- UGA local runtime and backup files ---
+/qdrant/
+/qdrant.zip
+
+# --- Generated audit reports ---
+*audit*.json
+backend_audit_current.json
+frontend_audit.json
+
+# --- Temporary test and diagnostic output ---
+test-results*.txt
+migrate_diff_stderr.txt
+
+# --- Machine-specific PostgreSQL helper scripts ---
+backend/audit_pg.bat
+backend/reload_pg.bat
+backend/test_pg_trust.bat
+backend/update_pg_trust.bat
